@@ -1,4 +1,5 @@
 on: [pull_request]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,11 +14,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          pip install pipenv
-          pipenv install --dev
-      - name: Turn on editable mode
-        run: pipenv install -e .
+          python -m pip install --upgrade pip
+          pip install pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Test with pytest
-        run: |
-          pipenv install pytest
-          pipenv run python -m pytest
+        run: pytest
