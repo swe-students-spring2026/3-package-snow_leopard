@@ -22,6 +22,28 @@ COMPLIMENTS = [
     {"text": "You are the human version of a reassuring green check mark.", "appearance": False, "personality": True, "corny": True},
     {"text": "You make people feel heard, and that is rare.", "appearance": False, "personality": True, "corny": False},
 ]
+def get_quote_by_type(quote_type, num_of_quotes=1):
+    """
+    Returns random quote(s) filtered by type.
+    If num_of_quotes param is 1, returns a single quote.
+    Otherwise returns a list of quote texts.
+    """
+    filtered_quotes = [q for q in QUOTES if q["type"] == quote_type]
+
+    if not filtered_quotes:
+        raise ValueError(f"No quotes found for type: {quote_type}")
+
+    if num_of_quotes < 1:
+        raise ValueError("Number of quotes must be at least 1")
+
+    if num_of_quotes > len(filtered_quotes):
+        raise ValueError(f"Requested {num_of_quotes} quotes, but only {len(filtered_quotes)} available for type '{quote_type}'")
+
+    selected_quotes = random.sample(filtered_quotes, num_of_quotes)
+
+    result = [q["text"] for q in selected_quotes]
+
+    return result[0] if num_of_quotes == 1 else result
 
 def get_random_quote(num_of_quotes):
     """
