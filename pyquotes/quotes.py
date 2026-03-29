@@ -49,5 +49,16 @@ def get_random_quote(num_of_quotes):
         random_quote_texts.append(q["text"])
     return random_quote_texts
 
+def get_quote_by_author_name(author_name):
+    """
+    Returns all quotes based on the authors names
+    """
+    author_quotes = [
+        q["text"] for q in QUOTES
+        if q["author"].lower() == author_name.lower()
+    ]
 
-
+    if not author_quotes:
+        raise ValueError(f"No quotes by this given author: {author_name}")
+    
+    return author_quotes
