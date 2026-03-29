@@ -11,6 +11,18 @@ QUOTES=[
     {"text": "You know you're in love when you can't fall asleep because reality is finally better than your dreams.", "author": "Dr.Seuss", "type": "love"},
 ]
 
+# Each compliment stores its own tag values so filtering stays local and fast.
+COMPLIMENTS = [
+    {"text": "Your smile could make a cloudy day file for overtime.", "appearance": True, "personality": False, "corny": True},
+    {"text": "You look like you were rendered in high definition.", "appearance": True, "personality": False, "corny": False},
+    {"text": "Your style is so sharp it could debug a dull room.", "appearance": True, "personality": False, "corny": True},
+    {"text": "You have the kind of presence that turns heads quietly.", "appearance": True, "personality": False, "corny": False},
+    {"text": "You make kindness look like a superpower.", "appearance": False, "personality": True, "corny": False},
+    {"text": "Your positivity could charge a dead laptop.", "appearance": False, "personality": True, "corny": True},
+    {"text": "You are the human version of a reassuring green check mark.", "appearance": False, "personality": True, "corny": True},
+    {"text": "You make people feel heard, and that is rare.", "appearance": False, "personality": True, "corny": False},
+]
+
 def get_random_quote(num_of_quotes):
     """
     Returns a specified number of random quotes from QUOTES
@@ -27,4 +39,38 @@ def get_random_quote(num_of_quotes):
     return random_quote_texts
 
 
+def get_compliment(appearance=None, personality=None, corny=False):
+    """
+    Return one random compliment filtered by the requested boolean tags.
+    """
+    # Treat omitted category arguments differently from explicit True/False values.
+    if appearance is None and personality is None:
+        appearance = True
+        personality = False
+    elif appearance is None:
+        appearance = False
+    elif personality is None:
+        personality = False
+
+    filters = {"appearance": appearance, "personality": personality, "corny": corny}
+
+    # Keep the public API predictable by rejecting truthy and falsey non-bools.
+    if not all(isinstance(value, bool) for value in filters.values()):
+        raise TypeError("appearance, personality, and corny must be booleans")
+
+    # A compliment can be appearance or personality, but never both.
+    if appearance and personality:
+        raise ValueError("appearance and personality cannot both be True")
+
+    # A compliment must satisfy every requested tag to be included.
+    matches = [
+        compliment["text"]
+        for compliment in COMPLIMENTS
+        if all(not filters[tag] or compliment[tag] for tag in filters)
+    ]
+
+    if not matches:
+        raise ValueError("No compliments match the requested tags")
+
+    return random.choice(matches)
 
