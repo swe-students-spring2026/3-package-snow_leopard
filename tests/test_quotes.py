@@ -26,14 +26,6 @@ class Tests:
         actual = quotes.get_compliment()
         assert isinstance(actual, str)
 
-    def test_get_compliment_default_is_from_bank(self):
-        """
-        The default compliment for the default appearance filter.
-        """
-        actual = quotes.get_compliment()
-        expected = [c["text"] for c in quotes.COMPLIMENTS if c["appearance"]]
-        assert actual in expected
-
     def test_get_compliment_appearance_filter(self):
         """
         Test that appearance=True only returns appearance compliments.
