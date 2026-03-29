@@ -60,5 +60,6 @@ def get_quote_by_author_name(author_name):
 
     if not author_quotes:
         raise ValueError(f"No quotes by this given author: {author_name}")
-    
+
     return author_quotes
+    
