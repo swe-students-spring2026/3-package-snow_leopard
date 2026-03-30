@@ -80,6 +80,8 @@ def get_random_quote(num_of_quotes):
     Returns a specified number of random quotes from QUOTES
     as a list of the text values
     """
+    if not isinstance(num_of_quotes, int):
+        raise TypeError ("Number of quotes must be an integer")
     if num_of_quotes < 1:
         raise ValueError ("Number of quotes must be at least 1")
     if num_of_quotes > len(QUOTES):
