@@ -1,7 +1,7 @@
 import pytest 
 from pyquotes import quotes
 
-class Tests:
+class Test:
     def test_get_quote_by_type_invalid_type(self):
         """
         Tests that get_quote_by_type raises an exception 
