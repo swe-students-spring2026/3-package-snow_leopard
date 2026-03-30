@@ -11,28 +11,46 @@ QUOTES=[
     {"text": "You know you're in love when you can't fall asleep because reality is finally better than your dreams.", "author": "Dr.Seuss", "type": "love"},
 ]
 
-def get_quote_by_type(quote_type, num_of_quotes=1):
-    """
-    Returns random quote(s) filtered by type.
-    If num_of_quotes param is 1, returns a single quote.
-    Otherwise returns a list of quote texts.
-    """
-    filtered_quotes = [q for q in QUOTES if q["type"] == quote_type]
+COMPLIMENTS = [
+    {"text": "Your smile could make a cloudy day file for overtime.", "appearance": True, "personality": False, "corny": True},
+    {"text": "You look like you were rendered in high definition.", "appearance": True, "personality": False, "corny": False},
+    {"text": "Your style is so sharp it could debug a dull room.", "appearance": True, "personality": False, "corny": True},
+    {"text": "You have the kind of presence that turns heads quietly.", "appearance": True, "personality": False, "corny": False},
+    {"text": "You make kindness look like a superpower.", "appearance": False, "personality": True, "corny": False},
+    {"text": "Your positivity could charge a dead laptop.", "appearance": False, "personality": True, "corny": True},
+    {"text": "You are the human version of a reassuring green check mark.", "appearance": False, "personality": True, "corny": True},
+    {"text": "You make people feel heard, and that is rare.", "appearance": False, "personality": True, "corny": False},
+]
 
-    if not filtered_quotes:
-        raise ValueError(f"No quotes found for type: {quote_type}")
-
-    if num_of_quotes < 1:
-        raise ValueError("Number of quotes must be at least 1")
-
-    if num_of_quotes > len(filtered_quotes):
-        raise ValueError(f"Requested {num_of_quotes} quotes, but only {len(filtered_quotes)} available for type '{quote_type}'")
-
-    selected_quotes = random.sample(filtered_quotes, num_of_quotes)
-
-    result = [q["text"] for q in selected_quotes]
-
-    return result[0] if num_of_quotes == 1 else result
+FORTUNES = [
+    # --- TECH & DEBUGGING ---
+    {"text": "Your code will compile on the first try today.", "topic": "tech"},
+    {"text": "A missing semicolon will reveal itself to you in a dream.", "topic": "tech"},
+    {"text": "You will soon discover yet another JavaScript framework to learn.", "topic": "tech"},
+    {"text": "The bug you have been chasing for three days is actually just a typo.", "topic": "tech"},
+    {"text": "Your next Stack Overflow search will yield an answer from 2014 that perfectly solves your problem.", "topic": "tech"},
+    {"text": "The technical debt you ignored yesterday will introduce itself tomorrow.", "topic": "tech"},
+    {"text": "You will soon experience the deep, spiritual joy of deleting thousands of lines of legacy code.", "topic": "tech"},
+    {"text": "An unexpected 'git push --force' will test your patience and your backups.", "topic": "tech"},
+    {"text": "A sudden debugging epiphany will strike you the moment you step away from your keyboard.", "topic": "tech"},
+    {"text": "Your server logs will actually contain the exact error message you need.", "topic": "tech"},
+    {"text": "You will spend 4 hours automating a task that would have taken 5 minutes to do manually.", "topic": "tech"},
+    
+    # --- CAREER & TEAMWORK ---
+    {"text": "An exciting opportunity will present itself at your next standup meeting.", "topic": "career"},
+    {"text": "The senior engineer will finally approve your pull request without requesting any changes.", "topic": "career"},
+    {"text": "A meeting that was scheduled for a full hour will magically end in 15 minutes.", "topic": "career"},
+    {"text": "Your next performance review will feature the phrase '10x developer'.", "topic": "career"},
+    {"text": "You will successfully explain what an API is to a non-technical manager.", "topic": "career"},
+    {"text": "Your code deployment on a Friday afternoon will surprisingly go off without a hitch.", "topic": "career"},
+    
+    # --- LOVE & GENERAL ---
+    {"text": "A thrilling time is in your immediate future.", "topic": "general"},
+    {"text": "The caffeine will hit exactly when you need it most.", "topic": "general"},
+    {"text": "Someone is admiring your beautifully formatted README from afar.", "topic": "love"},
+    {"text": "True love is just one approved pull request away.", "topic": "love"},
+    {"text": "You and your pair-programming partner will share a moment of pure synergy.", "topic": "love"}
+]
 
 def get_random_quote(num_of_quotes):
     """
@@ -49,17 +67,5 @@ def get_random_quote(num_of_quotes):
         random_quote_texts.append(q["text"])
     return random_quote_texts
 
-def get_quote_by_author_name(author_name):
-    """
-    Returns all quotes based on the authors names
-    """
-    author_quotes = [
-        q["text"] for q in QUOTES
-        if q["author"].lower() == author_name.lower()
-    ]
 
-    if not author_quotes:
-        raise ValueError(f"No quotes by this given author: {author_name}")
 
-    return author_quotes
-    
