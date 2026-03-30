@@ -22,6 +22,36 @@ COMPLIMENTS = [
     {"text": "You make people feel heard, and that is rare.", "appearance": False, "personality": True, "corny": False},
 ]
 
+FORTUNES = [
+    # --- TECH & DEBUGGING ---
+    {"text": "Your code will compile on the first try today.", "topic": "tech"},
+    {"text": "A missing semicolon will reveal itself to you in a dream.", "topic": "tech"},
+    {"text": "You will soon discover yet another JavaScript framework to learn.", "topic": "tech"},
+    {"text": "The bug you have been chasing for three days is actually just a typo.", "topic": "tech"},
+    {"text": "Your next Stack Overflow search will yield an answer from 2014 that perfectly solves your problem.", "topic": "tech"},
+    {"text": "The technical debt you ignored yesterday will introduce itself tomorrow.", "topic": "tech"},
+    {"text": "You will soon experience the deep, spiritual joy of deleting thousands of lines of legacy code.", "topic": "tech"},
+    {"text": "An unexpected 'git push --force' will test your patience and your backups.", "topic": "tech"},
+    {"text": "A sudden debugging epiphany will strike you the moment you step away from your keyboard.", "topic": "tech"},
+    {"text": "Your server logs will actually contain the exact error message you need.", "topic": "tech"},
+    {"text": "You will spend 4 hours automating a task that would have taken 5 minutes to do manually.", "topic": "tech"},
+    
+    # --- CAREER & TEAMWORK ---
+    {"text": "An exciting opportunity will present itself at your next standup meeting.", "topic": "career"},
+    {"text": "The senior engineer will finally approve your pull request without requesting any changes.", "topic": "career"},
+    {"text": "A meeting that was scheduled for a full hour will magically end in 15 minutes.", "topic": "career"},
+    {"text": "Your next performance review will feature the phrase '10x developer'.", "topic": "career"},
+    {"text": "You will successfully explain what an API is to a non-technical manager.", "topic": "career"},
+    {"text": "Your code deployment on a Friday afternoon will surprisingly go off without a hitch.", "topic": "career"},
+    
+    # --- LOVE & GENERAL ---
+    {"text": "A thrilling time is in your immediate future.", "topic": "general"},
+    {"text": "The caffeine will hit exactly when you need it most.", "topic": "general"},
+    {"text": "Someone is admiring your beautifully formatted README from afar.", "topic": "love"},
+    {"text": "True love is just one approved pull request away.", "topic": "love"},
+    {"text": "You and your pair-programming partner will share a moment of pure synergy.", "topic": "love"}
+]
+
 def get_random_quote(num_of_quotes):
     """
     Returns a specified number of random quotes from QUOTES
@@ -59,4 +89,26 @@ def get_compliment(appearance=False, personality=False, corny=False):
 
     return random.choice(matches)
 
-
+def get_fortune(topic):
+    """
+    Returns a random fortune based on the requested topic.
+    Topics include: 'general', 'tech', 'career', and 'love'.
+    """
+    if not isinstance(topic, str):
+        raise TypeError("Topic must be a string")
+        
+    topic = topic.lower().strip()
+    
+    # Filter fortunes that match the requested topic
+    matches = [
+        fortune["text"] 
+        for fortune in FORTUNES 
+        if fortune["topic"] == topic
+    ]
+    
+    if not matches:
+        # Create a list of available topics to show the user what went wrong
+        available_topics = list(set([f["topic"] for f in FORTUNES]))
+        raise ValueError(f"No fortunes match the topic '{topic}'. Available topics: {', '.join(available_topics)}")
+        
+    return random.choice(matches)
