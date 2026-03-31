@@ -1,7 +1,7 @@
 import pytest 
 from pyquotes import quotes
 
-class Tests:
+class Test:
     def test_get_quote_by_type_invalid_type(self):
         """
         Tests that get_quote_by_type raises an exception 
@@ -82,9 +82,19 @@ class Tests:
         actual = quotes.get_random_quote(1)
         assert actual[0] in [q["text"] for q in quotes.QUOTES]
     def test_get_random_quote_length(self):
-        "Verify get_random_quote returns correct number of quotes"
+        """
+        Verify get_random_quote returns correct number of quotes
+        """
         actual = quotes.get_random_quote(3)
         assert len(actual) == 3
+    def test_get_random_quote_wrong_input(self):
+        """
+        Check that non-integer inputs are handled properly
+        """
+        with pytest.raises(TypeError):
+            quotes.get_random_quote("hello")
+        with pytest.raises(TypeError):
+            quotes.get_random_quote(1.5)
 
     def test_get_compliment_returns_string(self):
         """
