@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "81a3629496f4c801924eaf5ec24b62cc50a06f8770e94b8282cecd4365acc75c"
+            "sha256": "68e71c3076ff5f31d7946c9b0b120c6a5a51b9da91bae7c08a0ebd103d010b10"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -17,7 +17,7 @@
         ]
     },
     "default": {
-        "pyquotes": {
+        "pyquote": {
             "editable": true,
             "file": "."
         }
