@@ -138,7 +138,6 @@ class Test:
             c["text"] for c in quotes.COMPLIMENTS if c["personality"] and c["corny"]
         ]
         assert actual in expected
-
     def test_get_fortune_invalid_topic(self):
         """
         get_fortune should reject unknown topics.
@@ -160,4 +159,3 @@ class Test:
         fortune = quotes.get_fortune("tech")
         assert isinstance(fortune, str)
         assert fortune in [f["text"] for f in quotes.FORTUNES if f["topic"] == "tech"]
- 
