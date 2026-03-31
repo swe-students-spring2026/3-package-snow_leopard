@@ -92,7 +92,6 @@ def get_random_quote(num_of_quotes):
         random_quote_texts.append(q["text"])
     return random_quote_texts
 
-
 def get_compliment(appearance=False, personality=False, corny=False):
     """
     Return one random compliment filtered by the requested boolean tags.
@@ -121,19 +120,40 @@ def get_fortune(topic):
     """
     if not isinstance(topic, str):
         raise TypeError("Topic must be a string")
-        
+
     topic = topic.lower().strip()
-    
+
     # Filter fortunes that match the requested topic
     matches = [
         fortune["text"] 
         for fortune in FORTUNES 
         if fortune["topic"] == topic
     ]
-    
+
     if not matches:
         # Create a list of available topics to show the user what went wrong
         available_topics = list(set([f["topic"] for f in FORTUNES]))
         raise ValueError(f"No fortunes match the topic '{topic}'. Available topics: {', '.join(available_topics)}")
-        
+
     return random.choice(matches)
+
+def get_quotes_by_author_name(author_name):
+    """
+    Returns a list of quotes written by a given author
+    """
+    if not isinstance(author_name,str):
+        raise TypeError("Author name must be a string!")
+
+    lowercase_author = author_name.lower().strip()
+
+    authors_quotes = []
+
+    for quote in QUOTES:
+        quotes_author = quote["author"].lower().strip()
+        if lowercase_author == quotes_author:
+            authors_quotes.append(quote["text"])
+
+    if len(authors_quotes) == 0:
+        raise ValueError(f"No quotes for {author_name} found!")
+
+    return authors_quotes
