@@ -94,6 +94,11 @@ git commit -m "Add feature"
 git push origin feature/your-feature
 ```
 
+### Example Program
+```bash
+python3 example.py
+```
+
 ---
 
 ## Full Example Program
@@ -105,17 +110,8 @@ https://github.com/swe-students-spring2026/3-package-snow_leopard/blob/main/exam
 ---
 
 ## Contributors
-- https://github.com/mikhailbond1
-- https://github.com/ClaireBocz
-- https://github.com/ermuun0930
-- https://github.com/lucasbazoberry
-- https://github.com/ChrisC0205
-
----
-
-## License
-
-This project is licensed under the GNU General Public License v3.0.
-
-You are free to use, modify, and distribute this software under the same license.
-See the LICENSE file for more details.
+- [Mikhail Bond](https://github.com/mikhailbond1)
+- [Claire Boczkowski](https://github.com/ClaireBocz)
+- [Ermuun Bayartsaikhan](https://github.com/ermuun0930)
+- [Lucas Bazoberry](https://github.com/lucasbazoberry)
+- [Chris Cajamarca](https://github.com/ChrisC0205)

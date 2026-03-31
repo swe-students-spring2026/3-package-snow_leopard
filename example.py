@@ -1,6 +1,6 @@
 """Example script demonstrating the pyquotes package."""
 
-from pyquotes import quotes
+from pyquote import quotes
 
 
 def show_random_quotes():
