@@ -1,4 +1,4 @@
-import pytest 
+import pytest
 from pyquotes import quotes
 
 class Tests:
@@ -129,5 +129,55 @@ class Tests:
         ]
         assert actual in expected
 
+    def test_get_quotes_by_author_name_invalid_type(self):
+        """
+        Test if author name inserted is a string
+        """
+        with pytest.raises(TypeError):
+            quotes.get_quotes_by_author_name(123)
 
- 
+    def test_get_quotes_by_author_name_invalid_author(self):
+        """
+        Test to see if the author given exists
+        """
+        with pytest.raises(ValueError):
+            quotes.get_quotes_by_author_name("nonexistent_author")
+
+    def test_get_quotes_by_author_name_returns_list(self):
+        """
+        Test that function returns a list
+        """
+        actual = quotes.get_quotes_by_author_name("Mahatma Gandhi")
+        assert isinstance(actual, list), f"Expected a list, got {type(actual)}"
+
+    def test_get_quotes_by_author_name_content(self):
+        """
+        Test that quotes are from author
+        """
+        actual = quotes.get_quotes_by_author_name("Mahatma Gandhi")
+        expected = [q["text"] for q in quotes.QUOTES if q["author"] == "Mahatma Gandhi"]
+        assert actual == expected, f"Expected {expected}, got {actual}"
+
+    def test_get_quotes_by_author_name_case_insensitive(self):
+        """
+        Test that author matching is case-insensitive
+        """
+        actual = quotes.get_quotes_by_author_name("mahatma gandhi")
+        expected = [q["text"] for q in quotes.QUOTES if q["author"] == "Mahatma Gandhi"]
+        assert actual == expected, f"Expected {expected}, got {actual}"
+
+    def test_get_quotes_by_author_name_strips_whitespace(self):
+        """
+        Test that leading and trailing spaces are ignored
+        """
+        actual = quotes.get_quotes_by_author_name("  Mahatma Gandhi  ")
+        expected = [q["text"] for q in quotes.QUOTES if q["author"] == "Mahatma Gandhi"]
+        assert actual == expected, f"Expected {expected}, got {actual}"
+
+    def test_get_quotes_by_author_name_length(self):
+        """
+        Tests for the correct number of quotes
+        """
+        actual = quotes.get_quotes_by_author_name("Mahatma Gandhi")
+        expected = [q["text"] for q in quotes.QUOTES if q["author"] == "Mahatma Gandhi"]
+        assert len(actual) == len(expected), f"Expected {len(expected)}, got {len(actual)}"
