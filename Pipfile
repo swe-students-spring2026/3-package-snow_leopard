@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pyquotes = {file = ".", editable = true}
+pyquote = {file = ".", editable = true}
 
 [dev-packages]
 pytest = "*"
