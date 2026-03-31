@@ -111,9 +111,19 @@ class Tests:
 
     def test_get_compliment_corny_filter(self):
         """
-        Test that corny=True uses the default appearance=True filter.
+        Test that corny=True can return either appearance or personality compliments.
         """
         actual = quotes.get_compliment(corny=True)
+        expected = [
+            c["text"] for c in quotes.COMPLIMENTS if c["corny"]
+        ]
+        assert actual in expected
+
+    def test_get_compliment_appearance_and_corny_filter(self):
+        """
+        Test that appearance and corny can be combined successfully.
+        """
+        actual = quotes.get_compliment(appearance=True, corny=True)
         expected = [
             c["text"] for c in quotes.COMPLIMENTS if c["appearance"] and c["corny"]
         ]
