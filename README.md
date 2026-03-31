@@ -82,11 +82,16 @@ git commit -m "Add feature"
 git push origin feature/your-feature
 ```
 
+### Example Program
+```bash
+python3 example.py
+```
+
 ---
 
 ## Contributors
-- https://github.com/mikhailbond1
-- https://github.com/ClaireBocz
-- https://github.com/ermuun0930
-- https://github.com/lucasbazoberry
-- https://github.com/ChrisC0205
+- [Mikhail Bond](https://github.com/mikhailbond1)
+- [Claire Boczkowski](https://github.com/ClaireBocz)
+- [Ermuun Bayartsaikhan](https://github.com/ermuun0930)
+- [Lucas Bazoberry](https://github.com/lucasbazoberry)
+- [Chris Cajamarca](https://github.com/ChrisC0205)
