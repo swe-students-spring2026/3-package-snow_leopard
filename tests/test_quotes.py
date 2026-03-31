@@ -129,5 +129,25 @@ class Tests:
         ]
         assert actual in expected
 
+    def test_get_fortune_invalid_topic(self):
+        """
+        get_fortune should reject unknown topics.
+        """
+        with pytest.raises(ValueError):
+            quotes.get_fortune("sportsball")
 
+    def test_get_fortune_non_string(self):
+        """
+        get_fortune should enforce string input.
+        """
+        with pytest.raises(TypeError):
+            quotes.get_fortune(123)
+
+    def test_get_fortune_returns_topic_specific_string(self):
+        """
+        Fortune should be a string drawn from the requested topic set.
+        """
+        fortune = quotes.get_fortune("tech")
+        assert isinstance(fortune, str)
+        assert fortune in [f["text"] for f in quotes.FORTUNES if f["topic"] == "tech"]
  
