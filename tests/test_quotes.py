@@ -1,7 +1,7 @@
 import pytest 
 from pyquotes import quotes
 
-class Tests:
+class Test:
     def test_get_quote_by_type_invalid_type(self):
         """
         Tests that get_quote_by_type raises an exception 
@@ -82,9 +82,19 @@ class Tests:
         actual = quotes.get_random_quote(1)
         assert actual[0] in [q["text"] for q in quotes.QUOTES]
     def test_get_random_quote_length(self):
-        "Verify get_random_quote returns correct number of quotes"
+        """
+        Verify get_random_quote returns correct number of quotes
+        """
         actual = quotes.get_random_quote(3)
         assert len(actual) == 3
+    def test_get_random_quote_wrong_input(self):
+        """
+        Check that non-integer inputs are handled properly
+        """
+        with pytest.raises(TypeError):
+            quotes.get_random_quote("hello")
+        with pytest.raises(TypeError):
+            quotes.get_random_quote(1.5)
 
     def test_get_compliment_returns_string(self):
         """
@@ -138,6 +148,24 @@ class Tests:
             c["text"] for c in quotes.COMPLIMENTS if c["personality"] and c["corny"]
         ]
         assert actual in expected
+    def test_get_fortune_invalid_topic(self):
+        """
+        get_fortune should reject unknown topics.
+        """
+        with pytest.raises(ValueError):
+            quotes.get_fortune("sportsball")
 
+    def test_get_fortune_non_string(self):
+        """
+        get_fortune should enforce string input.
+        """
+        with pytest.raises(TypeError):
+            quotes.get_fortune(123)
 
- 
+    def test_get_fortune_returns_topic_specific_string(self):
+        """
+        Fortune should be a string drawn from the requested topic set.
+        """
+        fortune = quotes.get_fortune("tech")
+        assert isinstance(fortune, str)
+        assert fortune in [f["text"] for f in quotes.FORTUNES if f["topic"] == "tech"]
