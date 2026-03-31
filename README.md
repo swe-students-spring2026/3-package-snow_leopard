@@ -10,7 +10,7 @@
 ## Installation
 
 ### From PyPI
-https://pypi.org/project/
+https://pypi.org/project/pyquote/
 
 ```bash
 pip install pyquote
@@ -22,7 +22,7 @@ pip install pyquote
 
 ### Import
 ```python
-from your_package import (
+from pyquote import (
     get_quote_by_type,
     get_random_quote,
     get_compliment,
@@ -56,6 +56,18 @@ Return a compliment filtered by tags.
 ### get_fortune(topic)
 Return a fortune for a topic: general, tech, career, love.
 
+### get_quotes_by_author_name(author_name)
+Return quotes by a specific author.
+
+---
+### Configuration
+
+This package does not require any:
+
+- Environment variables
+- Database setup
+- External services
+
 ---
 
 ## Development
@@ -84,9 +96,26 @@ git push origin feature/your-feature
 
 ---
 
+## Full Example Program
+
+A complete example using all functions is available here:
+https://github.com/swe-students-spring2026/3-package-snow_leopard/blob/main/example.py
+
+
+---
+
 ## Contributors
 - https://github.com/mikhailbond1
 - https://github.com/ClaireBocz
 - https://github.com/ermuun0930
 - https://github.com/lucasbazoberry
 - https://github.com/ChrisC0205
+
+---
+
+## License
+
+This project is licensed under the GNU General Public License v3.0.
+
+You are free to use, modify, and distribute this software under the same license.
+See the LICENSE file for more details.
