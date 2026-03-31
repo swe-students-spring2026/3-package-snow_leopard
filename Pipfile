@@ -7,9 +7,9 @@ name = "pypi"
 pyquote = {file = ".", editable = true}
 
 [dev-packages]
-pytest = "*"
 build = "*"
 twine = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.9"
